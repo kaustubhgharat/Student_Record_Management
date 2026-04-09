@@ -15,7 +15,7 @@ function App() {
 
   const fetchStudents = async () => {
     try {
-      const res = await axios.get(`{replace YOUR_BACKEND_URL}/students`);
+      const res = await axios.get(`${process.env.REACT_APP_API_URL}/students`);
       setStudents(res.data);
     } catch (err) {
       console.error("Fetch Error:", err.response?.data || err.message);
@@ -30,9 +30,9 @@ function App() {
     e.preventDefault();
     try {
       if (editingId) {
-        await axios.put(`{replace YOUR_BACKEND_URL}/students/${editingId}`, form);
+        await axios.put(`${process.env.REACT_APP_API_URL}/students/${editingId}`, form);
       } else {
-        await axios.post(`{replace YOUR_BACKEND_URL}/students`, form);
+        await axios.post(`${process.env.REACT_APP_API_URL}/students`, form);
       }
       setForm({ name: '', regNo: '', phone: '', age: '', department: '' });
       setEditingId(null);
@@ -55,7 +55,7 @@ function App() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`{replace YOUR_BACKEND_URL}/students/${id}`);
+      await axios.delete(`${process.env.REACT_APP_API_URL}/students/${id}`);
       fetchStudents();
     } catch (err) {
       console.error("Delete Error:", err.response?.data || err.message);
